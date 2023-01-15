@@ -75,7 +75,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private void Death()
+    public void Death()
     {
         enabled = false;
         GetComponent<BombController>().enabled = false;
