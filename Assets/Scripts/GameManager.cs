@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
     }
     private void NewRound()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Main Menu");
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 
