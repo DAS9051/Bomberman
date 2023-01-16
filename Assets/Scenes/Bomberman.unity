@@ -3653,7 +3653,6 @@ MonoBehaviour:
   - {fileID: 1369313152}
   - {fileID: 450601467}
   - {fileID: 1533145318}
-  numofplayers: 3
 --- !u!4 &1363860630
 Transform:
   m_ObjectHideFlags: 0
