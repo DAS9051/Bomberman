@@ -15,6 +15,7 @@ public class ItemPickup : MonoBehaviour
 
     private void OnItemPickup(GameObject player)
     {
+        FindObjectOfType<GameManager>().pickupsound();
         switch (type)
         {
             case ItemType.ExtraBomb:

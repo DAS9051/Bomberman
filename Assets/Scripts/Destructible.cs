@@ -10,6 +10,10 @@ public class Destructible : MonoBehaviour
     public float itemSpawnChance = 0.2f;
     public GameObject[] spawnableItems;
 
+    [Header("Powerup SoundEffect")]
+    public AudioSource source;
+    public AudioClip pickup;
+
     private void Start()
     {
         Destroy(gameObject, destructionTime);
@@ -22,5 +26,10 @@ public class Destructible : MonoBehaviour
             int randomIndex = Random.Range(0, spawnableItems.Length);
             Instantiate(spawnableItems[randomIndex], transform.position, Quaternion.identity);
         }
+    }
+    
+    public void pickupsound(){
+        source.clip = pickup;
+        source.Play();
     }
 }

@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
     public GameObject[] players;
+    [Header("Powerup SoundEffect")]
+    public AudioSource source;
+    public AudioClip pickup;
     public static int numofplayers = 4;
     
     public void Start(){
@@ -37,6 +41,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void pickupsound(){
+        source.clip = pickup;
+        source.Play();
+    }
+
 }
 
 

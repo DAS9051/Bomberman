@@ -17,10 +17,15 @@ public class BombController : MonoBehaviour
     public LayerMask explosionLayerMask;
     public float explosionDuration = 1f;
     public int explosionRadius = 1;
-
+    [Header("Sound Effects")]
+    public AudioSource source;
+    public AudioClip place,explode;
+    
     [Header("Destructible")]
     public Tilemap destructibleTiles;
     public Destructible destructiblePrefab;
+
+
 
     private void OnEnable()
     {
@@ -37,6 +42,11 @@ public class BombController : MonoBehaviour
 
     private IEnumerator PlaceBomb()
     {
+
+        
+        source.clip = place;
+        source.Play();
+
         Vector2 position = transform.position;
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
@@ -45,6 +55,10 @@ public class BombController : MonoBehaviour
         bombsRemaining--;
 
         yield return new WaitForSeconds(bombFuseTime);
+
+        // sound
+        source.clip = explode;
+        source.Play();
 
         position = bomb.transform.position;
         position.x = Mathf.Round(position.x);

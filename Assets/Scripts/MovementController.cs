@@ -8,11 +8,13 @@ public class MovementController : MonoBehaviour
     private Vector2 direction = Vector2.down;
     public float speed = 5f;
 
+    [Header("Keybinds")]
     public KeyCode inputUp = KeyCode.W;
     public KeyCode inputDown = KeyCode.S;
     public KeyCode inputLeft = KeyCode.A;
     public KeyCode inputRight = KeyCode.D;
 
+    [Header("Animations")]
     public AnimatedSpriteRender spriteRenderUp;
     public AnimatedSpriteRender spriteRenderDown;
     public AnimatedSpriteRender spriteRenderLeft;
@@ -20,6 +22,9 @@ public class MovementController : MonoBehaviour
     public AnimatedSpriteRender spriteRendererdDeath;
     private AnimatedSpriteRender activeSpriteRenderer;
 
+    [Header("Sound Effects")]
+    public AudioSource source;
+    public AudioClip deathsound;
 
 
     private void Awake(){
@@ -77,6 +82,10 @@ public class MovementController : MonoBehaviour
 
     public void Death()
     {
+
+        source.clip = deathsound;
+        source.Play();
+
         enabled = false;
         GetComponent<BombController>().enabled = false;
 
