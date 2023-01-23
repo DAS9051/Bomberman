@@ -1,19 +1,26 @@
+//Using the UnityEngine and System.Collections libraries
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// MovementController class that handels the movement for the player
 public class MovementController : MonoBehaviour
 {
-    public new Rigidbody2D rigidbody { get; private set;}
+    // Declare a variable to store the Rigidbody2D component
+    public new Rigidbody2D rigidbody { get; private set; }
+    // Declare a variable to store the direction of movement
     private Vector2 direction = Vector2.down;
+    // Declare a variable to store the speed of movement
     public float speed = 5f;
 
+    // Declare variables for keybinds
     [Header("Keybinds")]
     public KeyCode inputUp = KeyCode.W;
     public KeyCode inputDown = KeyCode.S;
     public KeyCode inputLeft = KeyCode.A;
     public KeyCode inputRight = KeyCode.D;
 
+    // Declare variables for sprite renderers for different animations
     [Header("Animations")]
     public AnimatedSpriteRender spriteRenderUp;
     public AnimatedSpriteRender spriteRenderDown;
@@ -22,37 +29,47 @@ public class MovementController : MonoBehaviour
     public AnimatedSpriteRender spriteRendererdDeath;
     private AnimatedSpriteRender activeSpriteRenderer;
 
+    // Declare variables for sound effects
     [Header("Sound Effects")]
     public AudioSource source;
     public AudioClip deathsound;
 
-
-    private void Awake(){
+    // Get the Rigidbody2D component on Awake
+    private void Awake()
+    {
         rigidbody = GetComponent<Rigidbody2D>();
         activeSpriteRenderer = spriteRenderDown;
     }
 
+    // Check for input and update direction and animation on Update
     private void Update()
     {
-        if(!PauseMenu.ispaused){
-        if (Input.GetKey(inputUp))
+        if (!PauseMenu.ispaused)
         {
-            SetDirection(Vector2.up, spriteRenderUp);
-        } else if (Input.GetKey(inputDown))
-        {
-            SetDirection(Vector2.down, spriteRenderDown);
-        } else if (Input.GetKey(inputLeft))
-        {
-            SetDirection(Vector2.left, spriteRenderLeft);
-        } else if (Input.GetKey(inputRight))
-        {
-            SetDirection(Vector2.right, spriteRenderRight);
-        } else
-            SetDirection(Vector2.zero, activeSpriteRenderer);
-        
+            if (Input.GetKey(inputUp))
+            {
+                SetDirection(Vector2.up, spriteRenderUp);
+            }
+            else if (Input.GetKey(inputDown))
+            {
+                SetDirection(Vector2.down, spriteRenderDown);
+            }
+            else if (Input.GetKey(inputLeft))
+            {
+                SetDirection(Vector2.left, spriteRenderLeft);
+            }
+            else if (Input.GetKey(inputRight))
+            {
+                SetDirection(Vector2.right, spriteRenderRight);
+            }
+            else
+                SetDirection(Vector2.zero, activeSpriteRenderer);
+
 
         }
     }
+
+    // Move the rigidbody based on direction and speed on FixedUpdate
     private void FixedUpdate()
     {
         Vector2 position = rigidbody.position;
@@ -60,6 +77,8 @@ public class MovementController : MonoBehaviour
 
         rigidbody.MovePosition(position + translation);
     }
+
+    // Set the direction and animation based on input
     private void SetDirection(Vector2 newDirection, AnimatedSpriteRender spriteRender)
     {
         direction = newDirection;
@@ -73,6 +92,7 @@ public class MovementController : MonoBehaviour
         activeSpriteRenderer.idle = direction == Vector2.zero;
 
     }
+    // Check for collision with explosion and trigger death sequence
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Explosion"))
@@ -83,26 +103,32 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    // Disable movement and activate death animation and sound
     public void Death()
     {
-
-
+        // Disable movement and bomb dropping
         enabled = false;
         GetComponent<BombController>().enabled = false;
 
+        // Disable all movement animations
         spriteRenderUp.enabled = false;
         spriteRenderDown.enabled = false;
         spriteRenderLeft.enabled = false;
         spriteRenderRight.enabled = false;
+
+        // Enable death animation
         spriteRendererdDeath.enabled = true;
 
+        // Invoke a method to deactivate game object and check for win state after a delay
         Invoke(nameof(OnDeathEnded), 1.25f);
     }
 
+    // Deactivate game object and check for win state
     private void OnDeathEnded()
     {
         gameObject.SetActive(false);
         FindObjectOfType<GameManager>().CheckWinState();
     }
+
 }
 
