@@ -20,7 +20,7 @@ public class BombController : MonoBehaviour
     [Header("Sound Effects")]
     public AudioSource source;
     public AudioClip place,explode;
-    
+
     [Header("Destructible")]
     public Tilemap destructibleTiles;
     public Destructible destructiblePrefab;
@@ -34,9 +34,11 @@ public class BombController : MonoBehaviour
 
     private void Update()
     {
+        if (!PauseMenu.ispaused){
         if (bombsRemaining > 0 && Input.GetKeyDown(inputKey))
         {
             StartCoroutine(PlaceBomb());
+        }
         }
     }
 

@@ -34,6 +34,7 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
+        if(!PauseMenu.ispaused){
         if (Input.GetKey(inputUp))
         {
             SetDirection(Vector2.up, spriteRenderUp);
@@ -48,7 +49,7 @@ public class MovementController : MonoBehaviour
             SetDirection(Vector2.right, spriteRenderRight);
         } else
             SetDirection(Vector2.zero, activeSpriteRenderer);
-        {
+        
 
         }
     }
