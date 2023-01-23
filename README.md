@@ -1,8 +1,13 @@
+
 # Bomberman Remake (Local Multiplayer)
+
 
 ## Introduction
 
 Bomberman is a classic arcade-style game where players control their characters (the "bombermen") who must navigate through a maze-like environment, placing bombs to destroy obstacles and collect power-ups. The goal of the game is to be the last player standing.
+
+## How To Play
+To play the game go to: https://bomberman.dylansahota.com/
 
 ## Gameplay
 
