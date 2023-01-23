@@ -9,6 +9,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Bomberman");
     }
     public void quitgame(){
-        Application.Quit();
+        Application.ExternalCall("CloseTab");
     }
 }
