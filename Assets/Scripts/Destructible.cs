@@ -10,9 +10,7 @@ public class Destructible : MonoBehaviour
     public float itemSpawnChance = 0.2f;
     public GameObject[] spawnableItems;
 
-    [Header("Powerup SoundEffect")]
-    public AudioSource source;
-    public AudioClip pickup;
+
 
     private void Start()
     {
@@ -28,8 +26,5 @@ public class Destructible : MonoBehaviour
         }
     }
     
-    public void pickupsound(){
-        source.clip = pickup;
-        source.Play();
-    }
+
 }

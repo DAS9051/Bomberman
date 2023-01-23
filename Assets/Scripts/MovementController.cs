@@ -76,6 +76,8 @@ public class MovementController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Explosion"))
         {
+            source.clip = deathsound;
+            source.Play();
             Death();
         }
     }
@@ -83,8 +85,6 @@ public class MovementController : MonoBehaviour
     public void Death()
     {
 
-        source.clip = deathsound;
-        source.Play();
 
         enabled = false;
         GetComponent<BombController>().enabled = false;
